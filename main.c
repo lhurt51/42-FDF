@@ -98,15 +98,20 @@ int		read_file(char *av, char **board)
 {
 	int				fd;
 	unsigned int	i;
+	int				ret;
 	char			*tmp;
 
 	i = 0;
 	fd = open(av, O_RDONLY);
-	while(get_next_line(fd, &tmp))
+	if (fd < 0)
+		return((int)error("failed to open file"));
+	while((ret = get_next_line(fd, &tmp)))
 	{
 		board[i] = tmp;
 		i++;
 	}
+	if (ret < 0)
+		return((int)error("failed to get next line"));
 	close(fd);
 	return (1);
 }
@@ -117,10 +122,9 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return((int)error("wronge number of input files"));
-	ft_putnbr(count_ord(argv[1]));
-	ft_putendl("  ----------->");
 	board = (char**)malloc(sizeof(char*) * count_ord(argv[1]));
-	read_file(argv[1], board);
+	if (!read_file(argv[1], board))
+		return (0);
 	print_board(board, count_ord(argv[1]));
 	return (1);
 }
