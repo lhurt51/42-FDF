@@ -26,7 +26,7 @@ OPENGL =	-framework OpenGl
 
 APPKIT =	-framework AppKit
 
-LIBFT =		libft/
+LIBFT =		libft
 
 COMP =		make -C $(LIBFT) re
 
@@ -36,25 +36,27 @@ COMPF =		make -C $(LIBFT) fclean
 
 NAME =		fdf
 
-SRCS =		$(LIBFT)libft.a \
-			main.c
+SRCS =		$(LIBFT)/libft.a \
+			main.c	\
+			mlxfunc.c \
+			testfile.c \
 
 all: 	$(NAME)
 
 $(NAME):
 		@$(COMP)
 		@$(CC) $(INC) $(LIB) $(LX) $(OPENGL) $(APPKIT) $(FLAG) $(NAME) $(SRCS)
-		@echo "$(NAME): has been created."
+		@echo "$(NAME) & $(LIBFT).a: has been created."
 
 clean:
 		@$(COMPC)
-		@echo "$(LIBFT): has been cleaned."
+		@echo "$(LIBFT) has been cleaned."
 
 fclean:	clean
 		@$(COMPF)
 		@/bin/rm -f $(NAME)
-		@echo "$(NAME): has been erased."
+		@echo "$(NAME) & $(LIBFT).a: has been erased."
 
-re: fclean all
+re: 	fclean all
 
 .PHONY: all clean fclean re
