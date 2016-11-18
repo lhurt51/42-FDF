@@ -137,7 +137,7 @@ void TR_Rotate(float matrix[4][4], int ax, int ay, int az)
 void Project(vertex_t *Vertex)
 {
     if(!Vertex->Aligned.z)
-        Vertex->Aligned.z=1;
+        Vertex->Aligned.z = 1;
     //Projection formula
     Vertex->World.x = FOCAL_DISTANCE * Vertex->Aligned.x / Vertex->Aligned.z + XOrigin;
     Vertex->World.y = FOCAL_DISTANCE * Vertex->Aligned.y / Vertex->Aligned.z + YOrigin;

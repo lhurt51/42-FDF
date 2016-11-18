@@ -73,8 +73,8 @@ void		read_file(char *av, vertex_t **board, unsigned int count)
 
 int			main(int argc, char **argv)
 {
-	vertex_t		**board;
 	unsigned int	count;
+	vertex_t		**board;
 
 	if (argc != 2)
 		return((int)error("wronge number of input files"));
