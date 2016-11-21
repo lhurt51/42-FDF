@@ -139,6 +139,6 @@ void Project(vertex_t *Vertex)
     if(!Vertex->Aligned.z)
         Vertex->Aligned.z = 1;
     //Projection formula
-    Vertex->World.x = FOCAL_DISTANCE * Vertex->Aligned.x / Vertex->Aligned.z + XOrigin;
-    Vertex->World.y = FOCAL_DISTANCE * Vertex->Aligned.y / Vertex->Aligned.z + YOrigin;
+    Vertex->Screen.x = FOCAL_DISTANCE * Vertex->Aligned.x / Vertex->Aligned.z + XOrigin;
+    Vertex->Screen.y = FOCAL_DISTANCE * Vertex->Aligned.y / Vertex->Aligned.z + YOrigin;
 }

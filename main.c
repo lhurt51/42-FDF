@@ -36,14 +36,25 @@ unsigned int	count_ord(char *av)
 	return (count);
 }
 
-vertex_t	*store_local(char **line, unsigned int y, unsigned int count)
+unsigned int	count_lines(char **str)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+vertex_t	*store_local(char **line, unsigned int y, unsigned int *len)
 {
 	vertex_t		*array;
 	vertex_t		tmp;
 	unsigned int	x;
 
 	x = 0;
-	array = (vertex_t*)malloc(sizeof(vertex_t) * count);
+	*len = count_lines(line);
+	array = (vertex_t*)malloc(sizeof(vertex_t) * (*len));
 	while (line[x])
 	{
 		tmp.Local.x = x;
@@ -55,7 +66,7 @@ vertex_t	*store_local(char **line, unsigned int y, unsigned int count)
 	return (array);
 }
 
-void		read_file(char *av, vertex_t **board, unsigned int count)
+void		read_file(char *av, vertex_t **board, unsigned int *len)
 {
 	int				fd, ret;
 	unsigned int	i;
@@ -65,7 +76,7 @@ void		read_file(char *av, vertex_t **board, unsigned int count)
 	fd = open(av, O_RDONLY);
 	while((ret = get_next_line(fd, &tmp)))
 	{
-		board[i] = store_local(ft_strsplit(tmp, ' '), i, count);
+		board[i] = store_local(ft_strsplit(tmp, ' '), i, len);
 		i++;
 	}
 	close(fd);
@@ -73,15 +84,16 @@ void		read_file(char *av, vertex_t **board, unsigned int count)
 
 int			main(int argc, char **argv)
 {
-	unsigned int	count;
+	unsigned int	height, len;
 	vertex_t		**board;
 
+	len = 0;
 	if (argc != 2)
 		return((int)error("wronge number of input files"));
-	if (!(count = count_ord(argv[1])))
+	if (!(height = count_ord(argv[1])))
 		return (0);
-	board = (vertex_t**)malloc(sizeof(vertex_t*) * count);
-	read_file(argv[1], board, count);
-	split_board(board, count);
+	board = (vertex_t**)malloc(sizeof(vertex_t*) * height);
+	read_file(argv[1], board, &len);
+	split_board(board, height, len);
 	return (1);
 }
