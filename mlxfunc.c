@@ -14,107 +14,115 @@
 
 void 	draw_y(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
 {
-	float	m, e;
-	int		y1, y2, i, j, inc;
+	float	x1, x2, y1, y2, x, y, p, end;
 
-	i = fabs(point1->x);
-	y1 = fabs(point1->y);
-	y2 = fabs(point2->y);
-	m = fabs(xans/yans);
-	if (xans > 0)
+	x1 = point1->x;
+	y1 = point1->y;
+	x2 = point2->x;
+	y2 = point2->y;
+	p = 2 * xans - yans;
+	if (y1 > y2)
 	{
-		inc = 1;
-		e = -(1 - (point1->x - i) - (point1->y - y1) * (xans / yans));
+		x = x2;
+		y = y2;
+		end = y1;
 	}
 	else
 	{
-		inc = -1;
-		e = -((point1->x - i) - (point1->y - y1) * (xans / yans));
+		x = x1;
+		y = y1;
+		end = y2;
 	}
-	j = y1;
-	while (j < y2)
+	while (y < end)
 	{
-		while (e >= 0)
+		y++;
+		if (p < 0)
 		{
-			i += inc;
-			e -= 1.0;
+			p += 2 * xans;
 		}
-		mlx_pixel_put(lst->mlx, lst->win, i , j, 0xFFFFFF);
-		j += 1;
-		e += m;
+		else
+		{
+			x++;
+			p += 2 * (xans - yans);
+		}
+		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 	}
 }
 
 void 	draw_x(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
 {
-	float	m, e;
-	int		x1, x2, i, j, inc;
+	float	x1, x2, y1, y2, x, y, p, end;
 
-	j = fabs(point1->y);
-	x1 = fabs(point1->x);
-	x2 = fabs(point2->x);
-	m = fabs(xans/yans);
-	if (yans > 0)
+	x1 = point1->x;
+	y1 = point1->y;
+	x2 = point2->x;
+	y2 = point2->y;
+	p = 2 * yans - xans;
+	if (x1 > x2)
 	{
-		inc = 1;
-		e = -(1 - (point1->y - j) - (yans * (1 - (point1->x - x1)) / xans));
+		x = x2;
+		y = y2;
+		end = x1;
 	}
 	else
 	{
-		inc = -1;
-		e = -((point1->y - j) - (point1->x - x1) * (xans / yans));
+		x = x1;
+		y = y1;
+		end = x2;
 	}
-	i = x1;
-	while (i < x2)
+	while (x < end)
 	{
-		while (e >= 0)
+		x++;
+		if (p < 0)
 		{
-			j += inc;
-			e -= 1.0;
+			p += 2 * yans;
 		}
-		mlx_pixel_put(lst->mlx, lst->win, i , j, 0xFFFFFF);
-		i += 1;
-		e += m;
+		else
+		{
+			y++;
+			p += 2 * (yans - xans);
+		}
+		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 	}
 }
 
 void 	get_DA(t_mlx *lst, _3D *point1, _3D *point2)
 {
-	float	xans, yans;
+	float		xans, yans;
 
-	xans = point2->x - point1->x;
-	yans = point2->y - point1->y;
-	if (fabs(xans) > fabs(yans))
+	xans = point1->x - point2->x;
+	yans = point1->y - point2->y;
+	if (xans > yans)
 		draw_x(lst, point1, point2, xans, yans);
 	else
 		draw_y(lst, point1, point2, xans, yans);
 }
 
 void    draw_line(t_mlx *lst, vertex_t **board, unsigned int i, unsigned int j,
-	 	unsigned int count)
+	 	unsigned int h, unsigned int l)
 {
-	if (i + 1 < count)
+	if (i + 1 < h)
 	{
-		get_DA(lst, &board[i][j].World, &board[i + 1][j].World);
+		get_DA(lst, &board[i][j].Screen, &board[i + 1][j].Screen);
 	}
-	if (j + 1 < count)
+	if (j + 1 < l)
 	{
-		get_DA(lst, &board[i][j].World, &board[i][j + 1].World);
+		get_DA(lst, &board[i][j].Screen, &board[i][j + 1].Screen);
 	}
 }
 
-void    handle_line(t_mlx *lst, vertex_t **board, unsigned int count)
+void    handle_line(t_mlx *lst, vertex_t **board, unsigned int h, unsigned int l)
 {
 	unsigned int i, j;
 
 	i = 0;
-	while (i < count)
+	while (i < h)
 	{
 		j = 0;
-		while (j < count)
+		while (j < l)
 		{
-			mlx_pixel_put(lst->mlx, lst->win, board[i][j].World.x , board[i][j].World.y, 0xFFFFFF);
-			draw_line(lst, board, i, j, count);
+			mlx_pixel_put(lst->mlx, lst->win, board[i][j].Screen.x , board[i][j].Screen.y, 0xFF0000);
+			draw_line(lst, board, i, j, h, l);
 			j++;
 		}
 		i++;
@@ -123,29 +131,9 @@ void    handle_line(t_mlx *lst, vertex_t **board, unsigned int count)
 
 int		my_key_funct(int keycode, t_mlx *new)
 {
-	float	tmp[4][4];
-	unsigned int i, j;
-
+	new = NULL;
 	if (keycode == 53)
 		exit(0);
-	else if (keycode == 0)
-	{
-		MAT_Identity(tmp);
-		TR_Rotate(tmp, 10, 0, 0);
-		mlx_clear_window(new->mlx, new->win);
-		i = 0;
-		while (i < 10)
-		{
-			j = 0;
-			while (j < 10)
-			{
-				VEC_MultMatrix(&new->board[i][j].World, tmp, &new->board[i][j].World);
-				j++;
-			}
-			i++;
-		}
-		handle_line(new, new->board, 10);
-	}
 	else
 	{
 		ft_putstr("This is the keycode: ");
@@ -155,28 +143,43 @@ int		my_key_funct(int keycode, t_mlx *new)
 	return (0);
 }
 
-void 	set_global(vertex_t **board, unsigned int count)
+void 	set_global(vertex_t **board, unsigned int h, unsigned int l)
 {
-	float			tmp[4][4];
+	float			tmp[4][4], tmp1[4][4];
 	unsigned int	i, j;
 
 	MAT_Identity(tmp);
-	TR_Scale(tmp, W_WIDTH / count, W_HEIGHT / count, 0);
-	TR_Translate(tmp, W_WIDTH / 2 / count, W_HEIGHT / 2 / count, 0);
+	TR_Scale(tmp, W_WIDTH / l, W_HEIGHT / h, -1);
+	TR_Rotate(tmp, 0, 0, 0);
+	TR_Translate(tmp, W_WIDTH / 2 / l, W_HEIGHT / 2 / h, -FOCAL_DISTANCE / 2 / 10);
 	i = 0;
-	while (i < count)
+	while (i < h)
 	{
 		j = 0;
-		while (j < count)
+		while (j < l)
 		{
 			VEC_MultMatrix(&board[i][j].Local, tmp, &board[i][j].World);
 			j++;
 		}
 		i++;
 	}
+	MAT_Identity(tmp1);
+	TR_Translate(tmp1, -XOrigin, -YOrigin, -FOCAL_DISTANCE);
+	i = 0;
+	while (i < h)
+	{
+		j = 0;
+		while (j < l)
+		{
+			VEC_MultMatrix(&board[i][j].World, tmp1, &board[i][j].Aligned);
+			Project(&board[i][j]);
+			j++;
+		}
+		i++;
+	}
 }
 
-void	split_board(vertex_t **board, unsigned int count)
+void	split_board(vertex_t **board, unsigned int h, unsigned int l)
 {
 	t_mlx			*new;
 
@@ -184,8 +187,8 @@ void	split_board(vertex_t **board, unsigned int count)
 	new->mlx = mlx_init();
 	new->win = mlx_new_window(new->mlx, W_WIDTH, W_HEIGHT, "42");
 	new->board = board;
-	set_global(board, count);
-	handle_line(new, board, count);
+	set_global(board, h, l);
+	handle_line(new, board, h, l);
 	mlx_key_hook(new->win, my_key_funct, new);
 	mlx_loop(new->mlx);
 }
