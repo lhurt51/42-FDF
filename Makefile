@@ -12,7 +12,7 @@
 
 CC =		gcc
 
-FLAG =		-Wall -Wextra -Werror -o
+FLAG =		-fsanitize=address -g -Wall -Wextra -Werror -o
 
 LX =		-lmlx
 

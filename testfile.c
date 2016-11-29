@@ -20,7 +20,7 @@ void MAT_Copy(float source[4][4], float dest[4][4])
         j = 0;
         while (j < 4)
         {
-            dest[i][j]=source[i][j];
+            dest[i][j] = source[i][j];
             j++;
         }
         i++;

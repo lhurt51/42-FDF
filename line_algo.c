@@ -91,3 +91,16 @@ void 	get_DA(t_mlx *lst, _3D *point1, _3D *point2)
 			draw_y(lst, point1, point2, xans, yans);
 	}
 }
+
+void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j,
+	 	unsigned int h, unsigned int l)
+{
+	if (i + 1 < h)
+	{
+		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i + 1][j].Screen);
+	}
+	if (j + 1 < l)
+	{
+		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i][j + 1].Screen);
+	}
+}

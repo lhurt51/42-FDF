@@ -63,6 +63,7 @@ void    TR_Translate(float matrix[4][4], float tx, float ty, float tz);
 void    TR_Scale(float matrix[4][4], float sx, float sy, float sz);
 void    TR_Rotate(float matrix[4][4], int ax, int ay, int az);
 void    Project(vertex_t *Vertex);
-void 	get_DA(t_mlx *lst, _3D *point1, _3D *point2);
+void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j,
+	 	unsigned int h, unsigned int l);
 
 #endif
