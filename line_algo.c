@@ -92,14 +92,13 @@ void 	get_DA(t_mlx *lst, _3D *point1, _3D *point2)
 	}
 }
 
-void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j,
-	 	unsigned int h, unsigned int l)
+void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j)
 {
-	if (i + 1 < h)
+	if (i + 1 < lst->h)
 	{
 		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i + 1][j].Screen);
 	}
-	if (j + 1 < l)
+	if (j + 1 < lst->l)
 	{
 		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i][j + 1].Screen);
 	}

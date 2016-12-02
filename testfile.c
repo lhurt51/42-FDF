@@ -101,7 +101,7 @@ void TR_Scale(float matrix[4][4], float sx, float sy, float sz)
 }
 
 //this will rotate my matrix to any position i want
-void TR_Rotate(float matrix[4][4], int ax, int ay, int az)
+void TR_Rotate(float matrix[4][4], float ax, float ay, float az)
 {
     float xmat[4][4], ymat[4][4], zmat[4][4];
     //x-axis rotation matrix
@@ -133,12 +133,12 @@ void TR_Rotate(float matrix[4][4], int ax, int ay, int az)
 
 /*---------- Creating Perspective ----------*/
 
-//the view point for the window X & YOrigin is the origin point of the window... THE CENTER!!!
+//the view point for the window X & W_YORIGIN is the origin point of the window... THE CENTER!!!
 void Project(vertex_t *Vertex)
 {
     if(!Vertex->Aligned.z)
         Vertex->Aligned.z = 1;
     //Projection formula
-    Vertex->Screen.x = FOCAL_DISTANCE * Vertex->Aligned.x / Vertex->Aligned.z + XOrigin;
-    Vertex->Screen.y = FOCAL_DISTANCE * Vertex->Aligned.y / Vertex->Aligned.z + YOrigin;
+    Vertex->Screen.x = FOCAL_DISTANCE * Vertex->Aligned.x / Vertex->Aligned.z + W_XORIGIN;
+    Vertex->Screen.y = FOCAL_DISTANCE * Vertex->Aligned.y / Vertex->Aligned.z + W_YORIGIN;
 }
