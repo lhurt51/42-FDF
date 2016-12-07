@@ -94,6 +94,6 @@ int			main(int argc, char **argv)
 		return (0);
 	board = (vertex_t**)malloc(sizeof(vertex_t*) * height);
 	read_file(argv[1], board, &len);
-	split_board(board, height, len);
+	run_win(board, height, len);
 	return (1);
 }

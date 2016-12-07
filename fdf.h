@@ -46,8 +46,20 @@ typedef struct     s_mlx
 	vertex_t       **board;
 }				   t_mlx;
 
-void	test_func(void);
-void	split_board(vertex_t **board, unsigned int h, unsigned int l);
+void 	rotate_a(t_mlx *new);
+void 	rotate_d(t_mlx *new);
+void 	rotate_w(t_mlx *new);
+void 	rotate_s(t_mlx *new);
+void 	rotate_q(t_mlx *new);
+void 	rotate_e(t_mlx *new);
+void 	set_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l);
+void 	reset_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l);
+void 	set_aligned(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l);
+void 	set_perspective(t_mlx *new);
+void 	set_screen(t_mlx *new, float tmp[4][4]);
+void 	set_parallel(t_mlx *new);
+void 	invert(t_mlx *new);
+void	run_win(vertex_t **board, unsigned int h, unsigned int l);
 void    MAT_Identity(float mat[4][4]);
 void    MAT_Copy(float source[4][4], float dest[4][4]);
 void    MAT_Mult(float mat1[4][4], float mat2[4][4], float dest[4][4]);
