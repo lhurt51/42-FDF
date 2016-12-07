@@ -39,11 +39,15 @@ NAME =		fdf
 SRCS =		$(LIBFT)/libft.a \
 			main.c	\
 			mlxfunc.c \
+			matfunc.c \
+			matfunc1.c \
 			hookfunc.c \
+			hookfunc1.c \
 			basicfunc.c \
+			basicfunc1.c \
 			extrafunc.c \
 			line_algo.c \
-			testfile.c \
+			rotfunc.c \
 
 all: 	$(NAME)
 

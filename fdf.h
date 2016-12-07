@@ -46,12 +46,21 @@ typedef struct     s_mlx
 	vertex_t       **board;
 }				   t_mlx;
 
+void    mat_identity(float mat[4][4]);
+void    mat_copy(float source[4][4], float dest[4][4]);
+void    mat_mult(float mat1[4][4], float mat2[4][4], float dest[4][4]);
+void    vec_multmat(_3D *Source, float mat[4][4], _3D *Dest);
+void    mat_translate(float matrix[4][4], float tx, float ty, float tz);
+void    mat_scale(float matrix[4][4], float sx, float sy, float sz);
+void    mat_rotate(float matrix[4][4], float ax, float ay, float az);
+void    project(vertex_t *Vertex);
 void 	rotate_a(t_mlx *new);
 void 	rotate_d(t_mlx *new);
 void 	rotate_w(t_mlx *new);
 void 	rotate_s(t_mlx *new);
 void 	rotate_q(t_mlx *new);
 void 	rotate_e(t_mlx *new);
+void 	set_global(t_mlx *new);
 void 	set_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l);
 void 	reset_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l);
 void 	set_aligned(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l);
@@ -60,14 +69,6 @@ void 	set_screen(t_mlx *new, float tmp[4][4]);
 void 	set_parallel(t_mlx *new);
 void 	invert(t_mlx *new);
 void	run_win(vertex_t **board, unsigned int h, unsigned int l);
-void    MAT_Identity(float mat[4][4]);
-void    MAT_Copy(float source[4][4], float dest[4][4]);
-void    MAT_Mult(float mat1[4][4], float mat2[4][4], float dest[4][4]);
-void    VEC_MultMatrix(_3D *Source, float mat[4][4], _3D *Dest);
-void    TR_Translate(float matrix[4][4], float tx, float ty, float tz);
-void    TR_Scale(float matrix[4][4], float sx, float sy, float sz);
-void    TR_Rotate(float matrix[4][4], float ax, float ay, float az);
-void    Project(vertex_t *Vertex);
 void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j);
 
 #endif

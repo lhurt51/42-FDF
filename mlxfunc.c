@@ -34,6 +34,8 @@ int		my_key_press(int keycode, t_mlx *new)
 		set_parallel(new);
 	else if (keycode == 36)
 		invert(new);
+	else if (keycode == 257)
+		set_global(new);
 	return (0);
 }
 
@@ -41,14 +43,14 @@ void 	set_global(t_mlx *new)
 {
 	float			tmp[4][4], tmp1[4][4], tmp2[4][4];
 
-	MAT_Identity(tmp);
-	TR_Translate(tmp, -(new->board[0][0].Local.x + new->board[new->h - 1][new->l - 1].Local.x) / 2, -(new->board[0][0].Local.y + new->board[new->h - 1][new->l - 1].Local.y) / 2, 0);
-	TR_Scale(tmp, W_WIDTH / new->l, W_HEIGHT / new->h, 10);
+	mat_identity(tmp);
+	mat_translate(tmp, -(new->board[0][0].Local.x + new->board[new->h - 1][new->l - 1].Local.x) / 2, -(new->board[0][0].Local.y + new->board[new->h - 1][new->l - 1].Local.y) / 2, 0);
+	mat_scale(tmp, W_WIDTH / new->l, W_HEIGHT / new->h, 10);
 	set_world(new->board, tmp, new->h, new->l);
-	MAT_Identity(tmp1);
-	TR_Translate(tmp1, W_XORIGIN, W_YORIGIN, -FOCAL_DISTANCE);
+	mat_identity(tmp1);
+	mat_translate(tmp1, W_XORIGIN, W_YORIGIN, -FOCAL_DISTANCE);
 	set_aligned(new->board, tmp1, new->h, new->l);
-	MAT_Identity(tmp2);
+	mat_identity(tmp2);
 	set_screen(new, tmp2);
 }
 
