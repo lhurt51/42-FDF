@@ -101,7 +101,7 @@ void TR_Scale(float matrix[4][4], float sx, float sy, float sz)
 }
 
 //this will rotate my matrix to any position i want
-void tr_rotate(float matrix[4][4], float ax, float ay, float az)
+void TR_Rotate(float matrix[4][4], float ax, float ay, float az)
 {
     float xmat[4][4], ymat[4][4], zmat[4][4];
     //x-axis rotation matrix
