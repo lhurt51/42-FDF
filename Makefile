@@ -39,6 +39,9 @@ NAME =		fdf
 SRCS =		$(LIBFT)/libft.a \
 			main.c	\
 			mlxfunc.c \
+			hookfunc.c \
+			basicfunc.c \
+			extrafunc.c \
 			line_algo.c \
 			testfile.c \
 
