@@ -42,7 +42,7 @@ typedef struct
 typedef struct     s_mlx
 {
 	void           *mlx, *win, *img;
-	unsigned int   h, l, d;
+	unsigned int   h, l;
 	vertex_t       **board;
 }				   t_mlx;
 
