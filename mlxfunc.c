@@ -39,12 +39,17 @@ int		my_key_press(int keycode, t_mlx *new)
 	return (0);
 }
 
-void 	set_global(t_mlx *new)
+void	set_global(t_mlx *new)
 {
-	float			tmp[4][4], tmp1[4][4], tmp2[4][4];
+	float	tmp[4][4];
+	float	tmp1[4][4];
+	float	tmp2[4][4];
 
 	mat_identity(tmp);
-	mat_translate(tmp, -(new->board[0][0].Local.x + new->board[new->h - 1][new->l - 1].Local.x) / 2, -(new->board[0][0].Local.y + new->board[new->h - 1][new->l - 1].Local.y) / 2, 0);
+	mat_translate(tmp, -(new->board[0][0].local.x +
+		new->board[new->h - 1][new->l - 1].local.x) / 2,
+		-(new->board[0][0].local.y +
+		new->board[new->h - 1][new->l - 1].local.y) / 2, 0);
 	mat_scale(tmp, W_WIDTH / new->l, W_HEIGHT / new->h, 10);
 	set_world(new->board, tmp, new->h, new->l);
 	mat_identity(tmp1);
@@ -54,7 +59,7 @@ void 	set_global(t_mlx *new)
 	set_screen(new, tmp2);
 }
 
-void	run_win(vertex_t **board, unsigned int h, unsigned int l)
+void	run_win(t_vertex **board, unsigned int h, unsigned int l)
 {
 	t_mlx			*new;
 

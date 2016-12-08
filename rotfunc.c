@@ -14,22 +14,21 @@
 
 void	rot_xaxis(float tmp1[4][4], float tmp2[4][4], float ax)
 {
-	float xmat[4][4];
-	//x-axis rotation matrix
+	float	xmat[4][4];
 
-    xmat[0][0] = 1;
+	xmat[0][0] = 1;
 	xmat[0][1] = 0;
 	xmat[0][2] = 0;
 	xmat[0][3] = 0;
-    xmat[1][0] = 0;
+	xmat[1][0] = 0;
 	xmat[1][1] = cos(ax);
 	xmat[1][2] = sin(ax);
 	xmat[1][3] = 0;
-    xmat[2][0] = 0;
+	xmat[2][0] = 0;
 	xmat[2][1] = -sin(ax);
 	xmat[2][2] = cos(ax);
 	xmat[2][3] = 0;
-    xmat[3][0] = 0;
+	xmat[3][0] = 0;
 	xmat[3][1] = 0;
 	xmat[3][2] = 0;
 	xmat[3][3] = 1;
@@ -39,7 +38,6 @@ void	rot_xaxis(float tmp1[4][4], float tmp2[4][4], float ax)
 void	rot_yaxis(float tmp1[4][4], float tmp2[4][4], float ay)
 {
 	float	ymat[4][4];
-	//y-axis rotation matrix
 
 	ymat[0][0] = cos(ay);
 	ymat[0][1] = 0;
@@ -63,37 +61,32 @@ void	rot_yaxis(float tmp1[4][4], float tmp2[4][4], float ay)
 void	rot_zaxis(float tmp1[4][4], float tmp2[4][4], float az)
 {
 	float	zmat[4][4];
-	//z-axis rotation matrix
 
-    zmat[0][0] = cos(az);
+	zmat[0][0] = cos(az);
 	zmat[0][1] = sin(az);
 	zmat[0][2] = 0;
 	zmat[0][3] = 0;
-    zmat[1][0] = -sin(az);
+	zmat[1][0] = -sin(az);
 	zmat[1][1] = cos(az);
 	zmat[1][2] = 0;
 	zmat[1][3] = 0;
-    zmat[2][0] = 0;
+	zmat[2][0] = 0;
 	zmat[2][1] = 0;
 	zmat[2][2] = 1;
 	zmat[2][3] = 0;
-    zmat[3][0] = 0;
+	zmat[3][0] = 0;
 	zmat[3][1] = 0;
 	zmat[3][2] = 0;
 	zmat[3][3] = 1;
 	mat_mult(tmp1, zmat, tmp2);
 }
 
-//this will rotate my matrix to any position i want
-void mat_rotate(float matrix[4][4], float ax, float ay, float az)
+void	mat_rotate(float matrix[4][4], float ax, float ay, float az)
 {
-    float	mat1[4][4], mat2[4][4];
+	float	mat1[4][4];
+	float	mat2[4][4];
 
-	//First we must rotate around the y-axis
 	rot_yaxis(matrix, mat1, ay);
-	//Then we rotate around the x-axis
 	rot_xaxis(mat1, mat2, ax);
-	//Finnaly, we rotate around the z-axis
 	rot_zaxis(mat2, matrix, az);
-    //We then return matrix indirrectly
 }

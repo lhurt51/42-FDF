@@ -12,9 +12,11 @@
 
 #include "fdf.h"
 
-void 	rotate_a(t_mlx *new)
+void	rotate_a(t_mlx *new)
 {
-	float			tmp[4][4], tmp1[4][4], tmp2[4][4];
+	float	tmp[4][4];
+	float	tmp1[4][4];
+	float	tmp2[4][4];
 
 	mat_identity(tmp);
 	mat_rotate(tmp, 0, (M_PI / 200), 0);
@@ -26,9 +28,11 @@ void 	rotate_a(t_mlx *new)
 	set_screen(new, tmp2);
 }
 
-void 	rotate_d(t_mlx *new)
+void	rotate_d(t_mlx *new)
 {
-	float			tmp[4][4], tmp1[4][4], tmp2[4][4];
+	float	tmp[4][4];
+	float	tmp1[4][4];
+	float	tmp2[4][4];
 
 	mat_identity(tmp);
 	mat_rotate(tmp, 0, -(M_PI / 200), 0);
@@ -40,9 +44,11 @@ void 	rotate_d(t_mlx *new)
 	set_screen(new, tmp2);
 }
 
-void 	rotate_w(t_mlx *new)
+void	rotate_w(t_mlx *new)
 {
-	float			tmp[4][4], tmp1[4][4], tmp2[4][4];
+	float	tmp[4][4];
+	float	tmp1[4][4];
+	float	tmp2[4][4];
 
 	mat_identity(tmp);
 	mat_rotate(tmp, (M_PI / 200), 0, 0);

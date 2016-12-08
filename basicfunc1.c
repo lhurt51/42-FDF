@@ -12,9 +12,10 @@
 
 #include "fdf.h"
 
-void    handle_line(t_mlx *lst)
+void	handle_line(t_mlx *lst)
 {
-	unsigned int i, j;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
 	mlx_clear_window(lst->mlx, lst->win);
@@ -23,7 +24,8 @@ void    handle_line(t_mlx *lst)
 		j = 0;
 		while (j < lst->l)
 		{
-			mlx_pixel_put(lst->mlx, lst->win, lst->board[i][j].Screen.x , lst->board[i][j].Screen.y, 0xFF0000);
+			mlx_pixel_put(lst->mlx, lst->win, lst->board[i][j].screen.x,
+				lst->board[i][j].screen.y, 0xFF0000);
 			check_for_line(lst, i, j);
 			j++;
 		}
@@ -31,10 +33,11 @@ void    handle_line(t_mlx *lst)
 	}
 }
 
-void 	set_perspective(t_mlx *new)
+void	set_perspective(t_mlx *new)
 {
 	float			tmp[4][4];
-	unsigned int	j, i;
+	unsigned int	j;
+	unsigned int	i;
 
 	i = 0;
 	mat_identity(tmp);
@@ -53,9 +56,10 @@ void 	set_perspective(t_mlx *new)
 	handle_line(new);
 }
 
-void 	set_screen(t_mlx *new, float tmp[4][4])
+void	set_screen(t_mlx *new, float tmp[4][4])
 {
-	unsigned int	j, i;
+	unsigned int	j;
+	unsigned int	i;
 
 	i = 0;
 	while (i < new->h)
@@ -63,7 +67,8 @@ void 	set_screen(t_mlx *new, float tmp[4][4])
 		j = 0;
 		while (j < new->l)
 		{
-			vec_multmat(&new->board[i][j].Aligned, tmp, &new->board[i][j].Screen);
+			vec_multmat(&new->board[i][j].aligned, tmp,
+				&new->board[i][j].screen);
 			j++;
 		}
 		i++;

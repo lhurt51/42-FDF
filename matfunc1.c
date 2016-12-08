@@ -12,50 +12,49 @@
 
 #include "fdf.h"
 
-//Copying a maxtrix to another.
-void mat_copy(float source[4][4], float dest[4][4])
+void	mat_copy(float source[4][4], float dest[4][4])
 {
-    int i,j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (i < 4)
-    {
-        j = 0;
-        while (j < 4)
-        {
-            dest[i][j] = source[i][j];
-            j++;
-        }
-        i++;
-    }
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			dest[i][j] = source[i][j];
+			j++;
+		}
+		i++;
+	}
 }
 
-//Multiplying two matricies together.
-void mat_mult(float matA[4][4], float matB[4][4], float dest[4][4])
+void	mat_mult(float mata[4][4], float matb[4][4], float dest[4][4])
 {
-    int i,j;
+	int i;
+	int	j;
 
-    i = 0;
-    while (i < 4)
-    {
-        j = 0;
-        while (j < 4)
-        {
-            dest[i][j] = matA[i][0] * matB[0][j] + matA[i][1] * matB[1][j] +
-                matA[i][2] * matB[2][j] + matA[i][3] * matB[3][j];
-            j++;
-        }
-        i++;
-    }
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			dest[i][j] = mata[i][0] * matb[0][j] + mata[i][1] * matb[1][j] +
+			mata[i][2] * matb[2][j] + mata[i][3] * matb[3][j];
+			j++;
+		}
+		i++;
+	}
 }
 
-// Multiplying vectors with a matrix???? still a bit confused on why & how.
-void vec_multmat(_3D *Source, float mat[4][4], _3D *Dest)
+void	vec_multmat(t_3d *source, float mat[4][4], t_3d *dest)
 {
-    Dest->x = Source->x * mat[0][0] + Source->y * mat[1][0]
-        + Source->z * mat[2][0] + mat[3][0];
-    Dest->y = Source->x * mat[0][1] + Source->y * mat[1][1]
-        + Source->z * mat[2][1] + mat[3][1];
-    Dest->z = Source->x * mat[0][2] + Source->y * mat[1][2]
-        + Source->z * mat[2][2] + mat[3][2];
+	dest->x = source->x * mat[0][0] + source->y * mat[1][0]
+		+ source->z * mat[2][0] + mat[3][0];
+	dest->y = source->x * mat[0][1] + source->y * mat[1][1]
+		+ source->z * mat[2][1] + mat[3][1];
+	dest->z = source->x * mat[0][2] + source->y * mat[1][2]
+		+ source->z * mat[2][2] + mat[3][2];
 }

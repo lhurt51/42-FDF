@@ -12,20 +12,18 @@
 
 #include "fdf.h"
 
-void 	draw_y(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
+void 	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, float xans, float yans)
 {
-	int		x, y, p, end, inc, xend;
+	int		x, y, p, inc;
 
 	x = point1->x;
 	y = point1->y;
-	xend = point2->x;
-	end = point2->y;
 	p = 2 * xans - yans;
-	if (x < xend)
+	if (x < (int)point2->x)
 		inc = 1;
 	else
 		inc = -1;
-	while (y < end)
+	while (y < (int)point2->y)
 	{
 		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 		if (p < 0)
@@ -41,20 +39,18 @@ void 	draw_y(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
 	}
 }
 
-void 	draw_x(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
+void 	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, float xans, float yans)
 {
-	int		x, y, p, end, inc, yend;
+	int		x, y, p, inc;
 
 	x = point1->x;
 	y = point1->y;
-	end = point2->x;
-	yend = point2->y;
 	p = 2 * yans - xans;
-	if (y < yend)
+	if (y < (int)point2->y)
 		inc = 1;
 	else
 		inc = -1;
-	while (x < end)
+	while (x < (int)point2->x)
 	{
 		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 		if (p < 0)
@@ -70,7 +66,7 @@ void 	draw_x(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
 	}
 }
 
-void 	get_DA(t_mlx *lst, _3D *point1, _3D *point2)
+void 	get_DA(t_mlx *lst, t_3d *point1, t_3d *point2)
 {
 	float		xans, yans;
 
@@ -96,10 +92,10 @@ void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j)
 {
 	if (i + 1 < lst->h)
 	{
-		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i + 1][j].Screen);
+		get_DA(lst, &lst->board[i][j].screen, &lst->board[i + 1][j].screen);
 	}
 	if (j + 1 < lst->l)
 	{
-		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i][j + 1].Screen);
+		get_DA(lst, &lst->board[i][j].screen, &lst->board[i][j + 1].screen);
 	}
 }

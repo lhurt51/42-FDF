@@ -12,9 +12,11 @@
 
 #include "fdf.h"
 
-void 	invert(t_mlx *new)
+void			invert(t_mlx *new)
 {
-	float			tmp[4][4], tmp1[4][4], tmp2[4][4];
+	float	tmp[4][4];
+	float	tmp1[4][4];
+	float	tmp2[4][4];
 
 	mat_identity(tmp);
 	mat_scale(tmp, -1, -1, -1);
@@ -24,4 +26,14 @@ void 	invert(t_mlx *new)
 	set_aligned(new->board, tmp1, new->h, new->l);
 	mat_identity(tmp2);
 	set_screen(new, tmp2);
+}
+
+unsigned int	count_lines(char **str)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
