@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void 	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
+void	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 {
 	int		x;
 	int		y;
@@ -41,7 +41,7 @@ void 	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 	}
 }
 
-void 	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
+void	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 {
 	int		x;
 	int		y;
@@ -70,13 +70,13 @@ void 	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 	}
 }
 
-void 	get_DA(t_mlx *lst, t_3d *point1, t_3d *point2)
+void	get_da(t_mlx *lst, t_3d *point1, t_3d *point2)
 {
 	t_line		*new;
 
 	new = malloc(sizeof(t_line));
 	if (!new)
-		return;
+		return ;
 	new->xans = fabs(point2->x - point1->x);
 	new->yans = fabs(point2->y - point1->y);
 	if (new->xans > new->yans)
@@ -95,14 +95,14 @@ void 	get_DA(t_mlx *lst, t_3d *point1, t_3d *point2)
 	}
 }
 
-void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j)
+void	check_for_line(t_mlx *lst, unsigned int i, unsigned int j)
 {
 	if (i + 1 < lst->h)
 	{
-		get_DA(lst, &lst->board[i][j].screen, &lst->board[i + 1][j].screen);
+		get_da(lst, &lst->board[i][j].screen, &lst->board[i + 1][j].screen);
 	}
 	if (j + 1 < lst->l)
 	{
-		get_DA(lst, &lst->board[i][j].screen, &lst->board[i][j + 1].screen);
+		get_da(lst, &lst->board[i][j].screen, &lst->board[i][j + 1].screen);
 	}
 }
