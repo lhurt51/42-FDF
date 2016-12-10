@@ -41,6 +41,13 @@ typedef struct		s_vertex
 	t_3d			screen;
 }					t_vertex;
 
+typedef struct		s_line
+{
+	int				inc;
+	float			yans;
+	float			xans;
+}					t_line;
+
 typedef struct		s_mlx
 {
 	void			*mlx;

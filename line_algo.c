@@ -12,55 +12,59 @@
 
 #include "fdf.h"
 
-void 	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, float xans, float yans)
+void 	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 {
-	int		x, y, p, inc;
+	int		x;
+	int		y;
+	int		p;
 
 	x = point1->x;
 	y = point1->y;
-	p = 2 * xans - yans;
+	p = 2 * new->xans - new->yans;
 	if (x < (int)point2->x)
-		inc = 1;
+		new->inc = 1;
 	else
-		inc = -1;
+		new->inc = -1;
 	while (y < (int)point2->y)
 	{
 		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 		if (p < 0)
 		{
-			p += 2 * xans;
+			p += 2 * new->xans;
 		}
 		else
 		{
-			x += inc;
-			p += 2 * (xans - yans);
+			x += new->inc;
+			p += 2 * (new->xans - new->yans);
 		}
 		y++;
 	}
 }
 
-void 	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, float xans, float yans)
+void 	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 {
-	int		x, y, p, inc;
+	int		x;
+	int		y;
+	int		p;
 
 	x = point1->x;
 	y = point1->y;
-	p = 2 * yans - xans;
+	p = 2 * new->yans - new->xans;
 	if (y < (int)point2->y)
-		inc = 1;
+		new->inc = 1;
 	else
-		inc = -1;
+		new->inc = -1;
 	while (x < (int)point2->x)
 	{
 		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 		if (p < 0)
 		{
-			p += 2 * yans;
+			p += 2 * new->yans;
 		}
 		else
 		{
-			y += inc;
-			p += 2 * (yans - xans);
+			y += new->inc;
+			p += 2 * (new->yans - new->xans);
 		}
 		x++;
 	}
@@ -68,23 +72,26 @@ void 	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, float xans, float yans)
 
 void 	get_DA(t_mlx *lst, t_3d *point1, t_3d *point2)
 {
-	float		xans, yans;
+	t_line		*new;
 
-	xans = fabs(point2->x - point1->x);
-	yans = fabs(point2->y - point1->y);
-	if (xans > yans)
+	new = malloc(sizeof(t_line));
+	if (!new)
+		return;
+	new->xans = fabs(point2->x - point1->x);
+	new->yans = fabs(point2->y - point1->y);
+	if (new->xans > new->yans)
 	{
 		if (point1->x > point2->x)
-			draw_x(lst, point2, point1, xans, yans);
+			draw_x(lst, point2, point1, new);
 		else
-			draw_x(lst, point1, point2, xans, yans);
+			draw_x(lst, point1, point2, new);
 	}
 	else
 	{
 		if (point1->y > point2->y)
-			draw_y(lst, point2, point1, xans, yans);
+			draw_y(lst, point2, point1, new);
 		else
-			draw_y(lst, point1, point2, xans, yans);
+			draw_y(lst, point1, point2, new);
 	}
 }
 
