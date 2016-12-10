@@ -12,94 +12,97 @@
 
 #include "fdf.h"
 
-void 	draw_y(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
+void	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 {
-	int		x, y, p, end, inc, xend;
+	int		x;
+	int		y;
+	int		p;
 
 	x = point1->x;
 	y = point1->y;
-	xend = point2->x;
-	end = point2->y;
-	p = 2 * xans - yans;
-	if (x < xend)
-		inc = 1;
+	p = 2 * new->xans - new->yans;
+	if (x < (int)point2->x)
+		new->inc = 1;
 	else
-		inc = -1;
-	while (y < end)
+		new->inc = -1;
+	while (y < (int)point2->y)
 	{
 		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 		if (p < 0)
 		{
-			p += 2 * xans;
+			p += 2 * new->xans;
 		}
 		else
 		{
-			x += inc;
-			p += 2 * (xans - yans);
+			x += new->inc;
+			p += 2 * (new->xans - new->yans);
 		}
 		y++;
 	}
 }
 
-void 	draw_x(t_mlx *lst, _3D *point1, _3D *point2, float xans, float yans)
+void	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 {
-	int		x, y, p, end, inc, yend;
+	int		x;
+	int		y;
+	int		p;
 
 	x = point1->x;
 	y = point1->y;
-	end = point2->x;
-	yend = point2->y;
-	p = 2 * yans - xans;
-	if (y < yend)
-		inc = 1;
+	p = 2 * new->yans - new->xans;
+	if (y < (int)point2->y)
+		new->inc = 1;
 	else
-		inc = -1;
-	while (x < end)
+		new->inc = -1;
+	while (x < (int)point2->x)
 	{
 		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 		if (p < 0)
 		{
-			p += 2 * yans;
+			p += 2 * new->yans;
 		}
 		else
 		{
-			y += inc;
-			p += 2 * (yans - xans);
+			y += new->inc;
+			p += 2 * (new->yans - new->xans);
 		}
 		x++;
 	}
 }
 
-void 	get_DA(t_mlx *lst, _3D *point1, _3D *point2)
+void	get_da(t_mlx *lst, t_3d *point1, t_3d *point2)
 {
-	float		xans, yans;
+	t_line		*new;
 
-	xans = fabs(point2->x - point1->x);
-	yans = fabs(point2->y - point1->y);
-	if (xans > yans)
+	new = malloc(sizeof(t_line));
+	if (!new)
+		return ;
+	new->xans = fabs(point2->x - point1->x);
+	new->yans = fabs(point2->y - point1->y);
+	if (new->xans > new->yans)
 	{
 		if (point1->x > point2->x)
-			draw_x(lst, point2, point1, xans, yans);
+			draw_x(lst, point2, point1, new);
 		else
-			draw_x(lst, point1, point2, xans, yans);
+			draw_x(lst, point1, point2, new);
 	}
 	else
 	{
 		if (point1->y > point2->y)
-			draw_y(lst, point2, point1, xans, yans);
+			draw_y(lst, point2, point1, new);
 		else
-			draw_y(lst, point1, point2, xans, yans);
+			draw_y(lst, point1, point2, new);
 	}
 }
 
-void    check_for_line(t_mlx *lst, unsigned int i, unsigned int j)
+void	check_for_line(t_mlx *lst, unsigned int i, unsigned int j)
 {
 	if (i + 1 < lst->h)
 	{
-		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i + 1][j].Screen);
+		get_da(lst, &lst->board[i][j].screen, &lst->board[i + 1][j].screen);
 	}
 	if (j + 1 < lst->l)
 	{
-		get_DA(lst, &lst->board[i][j].Screen, &lst->board[i][j + 1].Screen);
+		get_da(lst, &lst->board[i][j].screen, &lst->board[i][j + 1].screen);
 	}
 }

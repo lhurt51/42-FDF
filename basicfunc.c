@@ -12,9 +12,11 @@
 
 #include "fdf.h"
 
-void 	set_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l)
+void	set_world(t_vertex **board, float tmp[4][4], unsigned int h,
+	unsigned int l)
 {
-	unsigned int	j, i;
+	unsigned int	j;
+	unsigned int	i;
 
 	i = 0;
 	while (i < h)
@@ -22,17 +24,19 @@ void 	set_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int 
 		j = 0;
 		while (j < l)
 		{
-			vec_multmat(&board[i][j].Local, tmp, &board[i][j].World);
+			vec_multmat(&board[i][j].local, tmp, &board[i][j].world);
 			j++;
 		}
 		i++;
 	}
 }
 
-void 	reset_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l)
+void	reset_world(t_vertex **board, float tmp[4][4], unsigned int h,
+	unsigned int l)
 {
-	_3D				tmp3d;
-	unsigned int	j, i;
+	t_3d			tmp3d;
+	unsigned int	j;
+	unsigned int	i;
 
 	i = 0;
 	while (i < h)
@@ -40,17 +44,19 @@ void 	reset_world(vertex_t **board, float tmp[4][4], unsigned int h, unsigned in
 		j = 0;
 		while (j < l)
 		{
-			tmp3d = board[i][j].World;
-			vec_multmat(&tmp3d, tmp, &board[i][j].World);
+			tmp3d = board[i][j].world;
+			vec_multmat(&tmp3d, tmp, &board[i][j].world);
 			j++;
 		}
 		i++;
 	}
 }
 
-void 	set_aligned(vertex_t **board, float tmp[4][4], unsigned int h, unsigned int l)
+void	set_aligned(t_vertex **board, float tmp[4][4], unsigned int h,
+	unsigned int l)
 {
-	unsigned int	j, i;
+	unsigned int	j;
+	unsigned int	i;
 
 	i = 0;
 	while (i < h)
@@ -58,7 +64,7 @@ void 	set_aligned(vertex_t **board, float tmp[4][4], unsigned int h, unsigned in
 		j = 0;
 		while (j < l)
 		{
-			vec_multmat(&board[i][j].World, tmp, &board[i][j].Aligned);
+			vec_multmat(&board[i][j].world, tmp, &board[i][j].aligned);
 			j++;
 		}
 		i++;

@@ -270,7 +270,7 @@ void	*mlx_int_parse_xpm(mlx_ptr_t *xvar,void *info,int info_size,char *(*f)())
       img->gc = XCreateGC(xvar->display, xvar->root, GCClipMask|GCFunction|
 			  GCPlaneMask, &xgcv);
       XSync(xvar->display, False);
-      XDestroyImage(clip_img);
+      XdestroyImage(clip_img);
     }
   */
   if (colors)
