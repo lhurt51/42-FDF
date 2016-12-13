@@ -43,6 +43,7 @@ SRCS =		$(LIBFT)/libft.a \
 			matfunc1.c \
 			hookfunc.c \
 			hookfunc1.c \
+			hookfunc2.c \
 			basicfunc.c \
 			basicfunc1.c \
 			extrafunc.c \
