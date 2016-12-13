@@ -18,6 +18,12 @@ void	extra_hooks(int keycode, t_mlx *new)
 		zoom_in(new);
 	else if (keycode == 78)
 		zoom_out(new);
+	else if (keycode == 36)
+		invert(new);
+	else if (keycode == 257)
+		set_global(new);
+	else if (keycode  == 6)
+		invert_z(new);
 }
 
 int		my_key_press(int keycode, t_mlx *new)
@@ -40,10 +46,6 @@ int		my_key_press(int keycode, t_mlx *new)
 		set_perspective(new);
 	else if (keycode == 31)
 		set_parallel(new);
-	else if (keycode == 36)
-		invert(new);
-	else if (keycode == 257)
-		set_global(new);
 	else
 		extra_hooks(keycode, new);
 	return (0);

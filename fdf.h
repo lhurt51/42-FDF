@@ -76,6 +76,7 @@ void				rotate_q(t_mlx *new);
 void				rotate_e(t_mlx *new);
 void				zoom_out(t_mlx *new);
 void				zoom_in(t_mlx *new);
+void				invert_z(t_mlx *new);
 void				set_global(t_mlx *new);
 void				set_world(t_vertex **board, float tmp[4][4], unsigned int h,
 						unsigned int l);
