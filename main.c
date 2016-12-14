@@ -42,7 +42,7 @@ t_vertex		*store_local(char **line, unsigned int y, unsigned int *len)
 	unsigned int	x;
 
 	x = 0;
-	if (*len == 0)
+	if (*len == 0 && y == 0)
 		*len = count_lines(line);
 	array = (t_vertex*)malloc(sizeof(t_vertex) * (*len));
 	while (line[x])
@@ -74,6 +74,8 @@ int				read_file(char *av, t_vertex **board, unsigned int *len)
 			return ((int)error("wronge file format"));
 		i++;
 	}
+	if (i == 0)
+		return ((int)error("empty file"));
 	close(fd);
 	return (1);
 }
@@ -90,7 +92,7 @@ int				main(int argc, char **argv)
 	if (!(height = count_ord(argv[1])))
 		return (0);
 	board = (t_vertex**)malloc(sizeof(t_vertex*) * height);
-	if (!read_file(argv[1], board, &len))
+	if (!read_file(argv[1], board, &len) || !board)
 		return (0);
 	run_win(board, height, len);
 	return (1);

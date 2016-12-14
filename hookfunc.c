@@ -22,7 +22,9 @@ void	rotate_a(t_mlx *new)
 	mat_translate(tmp, -(new->board[0][0].world.x +
 		new->board[new->h - 1][new->l - 1].world.x) / 2,
 		-(new->board[0][0].world.y +
-		new->board[new->h - 1][new->l - 1].world.y) / 2, 0);
+		new->board[new->h - 1][new->l - 1].world.y) / 2,
+		-(new->board[0][0].world.z +
+		new->board[new->h - 1][new->l - 1].world.z) / 2);
 	mat_rotate(tmp, 0, (M_PI / 200), 0);
 	reset_world(new->board, tmp, new->h, new->l);
 	mat_identity(tmp1);
@@ -42,7 +44,9 @@ void	rotate_d(t_mlx *new)
 	mat_translate(tmp, -(new->board[0][0].world.x +
 		new->board[new->h - 1][new->l - 1].world.x) / 2,
 		-(new->board[0][0].world.y +
-		new->board[new->h - 1][new->l - 1].world.y) / 2, 0);
+		new->board[new->h - 1][new->l - 1].world.y) / 2,
+		-(new->board[0][0].world.z +
+		new->board[new->h - 1][new->l - 1].world.z) / 2);
 	mat_rotate(tmp, 0, -(M_PI / 200), 0);
 	reset_world(new->board, tmp, new->h, new->l);
 	mat_identity(tmp1);
@@ -62,7 +66,9 @@ void	rotate_w(t_mlx *new)
 	mat_translate(tmp, -(new->board[0][0].world.x +
 		new->board[new->h - 1][new->l - 1].world.x) / 2,
 		-(new->board[0][0].world.y +
-		new->board[new->h - 1][new->l - 1].world.y) / 2, 0);
+		new->board[new->h - 1][new->l - 1].world.y) / 2,
+		-(new->board[0][0].world.z +
+		new->board[new->h - 1][new->l - 1].world.z) / 2);
 	mat_rotate(tmp, (M_PI / 200), 0, 0);
 	reset_world(new->board, tmp, new->h, new->l);
 	mat_identity(tmp1);

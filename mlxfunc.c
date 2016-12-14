@@ -61,7 +61,9 @@ void	set_global(t_mlx *new)
 	mat_translate(tmp, -(new->board[0][0].local.x +
 		new->board[new->h - 1][new->l - 1].local.x) / 2,
 		-(new->board[0][0].local.y +
-		new->board[new->h - 1][new->l - 1].local.y) / 2, 0);
+		new->board[new->h - 1][new->l - 1].local.y) / 2,
+		-(new->board[0][0].world.z +
+		new->board[new->h - 1][new->l - 1].world.z) / 2);
 	mat_scale(tmp, W_HEIGHT / new->h, W_HEIGHT / new->h, 10);
 	set_world(new->board, tmp, new->h, new->l);
 	mat_identity(tmp1);
