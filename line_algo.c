@@ -27,11 +27,10 @@ void	draw_y(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 		new->inc = -1;
 	while (y < (int)point2->y)
 	{
-		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
+		if (x < W_WIDTH && y < W_HEIGHT)
+			mlx_pixel_put(lst->mlx, lst->win, x, y, LINE_COLOR);
 		if (p < 0)
-		{
 			p += 2 * new->xans;
-		}
 		else
 		{
 			x += new->inc;
@@ -56,11 +55,10 @@ void	draw_x(t_mlx *lst, t_3d *point1, t_3d *point2, t_line *new)
 		new->inc = -1;
 	while (x < (int)point2->x)
 	{
-		mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
+		if (x < W_WIDTH && y < W_HEIGHT)
+			mlx_pixel_put(lst->mlx, lst->win, x, y, 0xFFFFFF);
 		if (p < 0)
-		{
 			p += 2 * new->yans;
-		}
 		else
 		{
 			y += new->inc;

@@ -24,8 +24,10 @@ void	handle_line(t_mlx *lst)
 		j = 0;
 		while (j < lst->l)
 		{
-			mlx_pixel_put(lst->mlx, lst->win, lst->board[i][j].screen.x,
-				lst->board[i][j].screen.y, 0xFF0000);
+			if (lst->board[i][j].screen.x < W_WIDTH &&
+				lst->board[i][j].screen.y < W_HEIGHT)
+				mlx_pixel_put(lst->mlx, lst->win, lst->board[i][j].screen.x,
+					lst->board[i][j].screen.y, LINE_COLOR);
 			check_for_line(lst, i, j);
 			j++;
 		}

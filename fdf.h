@@ -25,6 +25,7 @@
 # define W_HEIGHT 1080
 # define W_XORIGIN W_WIDTH / 2
 # define W_YORIGIN W_HEIGHT / 2
+# define LINE_COLOR 0xFFFFFF
 
 typedef struct		s_3d
 {

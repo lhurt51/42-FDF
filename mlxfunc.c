@@ -22,7 +22,7 @@ void	extra_hooks(int keycode, t_mlx *new)
 		invert(new);
 	else if (keycode == 257)
 		set_global(new);
-	else if (keycode  == 6)
+	else if (keycode == 6)
 		invert_z(new);
 }
 
